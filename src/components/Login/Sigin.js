@@ -8,8 +8,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import logo from '../../assets/Login/chrome.svg';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -17,7 +16,7 @@ import Container from '@material-ui/core/Container';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'CinePlus Equipo'}
+            {'CinePlus Equipo5'}
         </Typography>
     );
 }
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(3, 1, 2),
     },
 }));
 
@@ -50,8 +49,8 @@ function SignIn() {
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    {/* <LockOutlinedIcon /> */}
-                    <img src={logo} className="App-logo" alt="logo" />
+                    <LockOutlinedIcon  />
+                    {/* <img src={logo} className="App-logo" alt="logo" /> */}
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
@@ -62,10 +61,10 @@ function SignIn() {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="user"
+                        label="User Name"
+                        name="user"
+                        autoComplete="user"
                         autoFocus
                     />
                     <TextField
