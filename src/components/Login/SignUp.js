@@ -3,8 +3,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -15,15 +15,25 @@ import Container from '@material-ui/core/Container';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+import SignIn from './Sigin'
+import { render } from '@testing-library/react';
+import printProps from './CustomField'
+let usernameValue = ''
+let passwordValue = ''
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'CinePlus Equipo5 © '}
+            {'CinePlus Equipo5'}
         </Typography>
     );
 }
 
+const preventDefault = () => {
+    render(
+        <SignIn></SignIn>
+    );
+}
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -46,6 +56,22 @@ const useStyles = makeStyles((theme) => ({
 
 function SignUp() {
     const classes = useStyles();
+    const [user, setValueUser] = React.useState("");
+    const [password, setValuePassword] = React.useState("")
+
+    printProps({user}, {password})
+
+    
+    
+    const handleChangeUser = event => {
+        usernameValue = event.target.value
+        setValueUser(event.target.value)
+    }
+
+    const handleChangePassword = event => {
+        passwordValue = event.target.value
+        setValuePassword(event.target.value)
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -91,6 +117,8 @@ function SignUp() {
                                 label="Username"
                                 name="username"
                                 autoComplete="username"
+                                value={user}
+                                onChange={handleChangeUser}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -110,13 +138,16 @@ function SignUp() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={password}
+                                onChange={handleChangePassword}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <VpnKeyOutlinedIcon/>
+                                            <VpnKeyOutlinedIcon />
                                         </InputAdornment>
                                     ),
                                 }}
+
                             />
                         </Grid>
 
@@ -132,7 +163,9 @@ function SignUp() {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="#"
+                                onClick={preventDefault}
+                                variant="body2">
                                 Already have an account? Sign in
                             </Link>
                         </Grid>

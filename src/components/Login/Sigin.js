@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
 
 function Copyright() {
     return (
@@ -66,6 +70,13 @@ function SignIn() {
                         name="user"
                         autoComplete="user"
                         autoFocus
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    < AccountCircle/>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <TextField
                         variant="outlined"
@@ -77,6 +88,13 @@ function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <VpnKeyOutlinedIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
