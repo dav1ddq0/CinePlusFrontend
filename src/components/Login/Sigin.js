@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InputAdornment from '@material-ui/core/InputAdornment';
-
+import {useHistory} from 'react-router-dom'
 
 function Copyright() {
     return (
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignIn() {
     const classes = useStyles();
-
+    const history = useHistory();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -116,7 +116,7 @@ function SignIn() {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href ='' onClick = {()=>history.push('/signup')} variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

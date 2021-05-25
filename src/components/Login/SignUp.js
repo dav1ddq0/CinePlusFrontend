@@ -18,6 +18,7 @@ import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import SignIn from './Sigin'
 import { render } from '@testing-library/react';
 import printProps from './CustomField'
+import {useHistory} from 'react-router-dom'
 let usernameValue = ''
 let passwordValue = ''
 
@@ -58,7 +59,7 @@ function SignUp() {
     const classes = useStyles();
     const [user, setValueUser] = React.useState("");
     const [password, setValuePassword] = React.useState("")
-
+    const history = useHistory();
     printProps({user}, {password})
 
     
@@ -163,8 +164,8 @@ function SignUp() {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#"
-                                onClick={preventDefault}
+                            <Link href=''
+                                onClick={()=>history.push('/signin')}
                                 variant="body2">
                                 Already have an account? Sign in
                             </Link>
