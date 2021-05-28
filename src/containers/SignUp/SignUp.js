@@ -203,7 +203,11 @@ function SignUp() {
 
                     </Grid>
                     <FormControlLabel
-                        control={<Checkbox checked={checked} onChange={onChangeCheckBox} />}
+                        control={
+                        <Checkbox 
+                            checked={checked}
+                            color ='primary'
+                            onChange={onChangeCheckBox} />}
                         style={{ textAlign: 'center', marginTop: '25px', color: 'black' }}
                         label='Check if you are interested in partnership'
                     />
