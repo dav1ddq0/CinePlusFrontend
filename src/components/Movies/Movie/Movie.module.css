@@ -1,0 +1,26 @@
+.Movie {
+    width: 60%;
+    margin: 16px auto;
+    border: 1px solid rgb(60, 21, 145);
+    box-shadow: 3px 3px 3px #ccc;
+    padding: 16px;
+    text-align: center;
+}
+
+@media (min-width: 500px){
+    .Movie{
+        width: 450px;
+    }
+}
+
+.drama {
+    background-color: cyan;
+}
+
+.action {
+    background-color: salmon;
+}
+
+.comedy {
+    background-color: green;
+}

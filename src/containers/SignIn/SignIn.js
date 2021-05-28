@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,124 +10,136 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles';
+import { DonutLarge } from '@material-ui/icons';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { lightBlue } from '@material-ui/core/colors';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+// import styles from './SiginSyles'
+import Input from '@material-ui/core/Input';
+import axios from 'axios';
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'CinePlus Equipo5'}
-        </Typography>
-    );
-}
-
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(6),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
         margin: theme.spacing(2),
-        backgroundColor: theme.palette.secondary.main,
+        color: 'white',
+        backgroundColor: 'blue',
+        fontSize: 'large',
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        width: '80%', // Fix IE 11 issue.
+        marginTop: theme.spacing(2),
     },
     submit: {
-        margin: theme.spacing(3, 1, 2),
+        margin: theme.spacing(1, 1, 2),
     },
-}));
+});
 
-function SignIn() {
-    const classes = useStyles();
+function SignIn({ classes }) {
+    const [password, setPassword] = useState('');
+    const [user, setUser] = useState('');
+
+    const userLoginHandler = () => {
+        let config = {
+            headers: {
+                'accept': '*/*',
+                'Content-Type': 'application/json'
+            }
+        };
+        
+        const userProfile = {
+            username: user,
+            password: password
+        }
+        
+        axios.post('https://localhost:5001/api/Auth/login', userProfile, config)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    const onChangePassword = e => {
+        setPassword(e.target.value);
+    };
+    const onChangeUser = e =>{
+        setUser(e.target.value)
+    };
+
+    // console.log(user, password)
     const history = useHistory();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon  />
-                    {/* <img src={logo} className="App-logo" alt="logo" /> */}
+                    <AccountCircleIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Login
                 </Typography>
-                <form className={classes.form} noValidate>
+
+
+                <form className={classes.form} noValidate autoComplete="off">
+
                     <TextField
-                        variant="outlined"
+                        id="username"
                         margin="normal"
-                        required
                         fullWidth
-                        id="user"
-                        label="User Name"
                         name="user"
                         autoComplete="user"
-                        autoFocus
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    < AccountCircle/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+                        label='User'
+                        onChange = {onChangeUser}
+                        autoFocus />
+
                     <TextField
-                        variant="outlined"
+                        variant="standard"
                         margin="normal"
-                        required
                         fullWidth
                         name="password"
-                        label="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <VpnKeyOutlinedIcon />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
+                        label="Password"
+                        onChange={onChangePassword} />
+
+
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={userLoginHandler}
                     >
                         Sign In
                     </Button>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
                         <Grid item>
-                            <Link href ='' onClick = {()=>history.push('/signup')} variant="body2">
+                            <Link href='' onClick={() => history.push('/signup')} variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
+
         </Container>
     );
 }
 
-export default SignIn;
+export default withStyles(styles)(SignIn);
